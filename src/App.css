@@ -1,38 +1,247 @@
-.App {
-  text-align: center;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  letter-spacing: 2px; 
+  height: 100vh;
+}
+.poketudo{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  /* place-items: center; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+
+.pokebox{
+  background: linear-gradient(
+    45deg, 
+    rgb(255, 0, 0), /* Cor de início do degradê */
+    orange, /* Cor intermediária */
+    red /* Cor de término do degradê */
+  );
+  /* background-color: rgb(138, 44, 226); */
+  height: 100vh;
+  display: grid;
+  grid-template-areas: 
+    "head"
+    "pokemon"
+    "options"
+  ;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+.pokequem{
+  /* background-color: brown; */
+  display: block;
+  height: 15em;
+  width: auto;
+  padding: 0;
+  filter: brightness(0);
+  animation-duration: 1s;
+  /* animation-direction: forwards; */
+  animation-fill-mode: forwards;
+  /* animation-name: pulse; */
+  object-fit: contain;
+}
+@keyframes pulse{
+  0% {
+    scale: 1;
+  }
+  50%{
+    scale: 0.6;
+  }
+  100%{
+    filter: brightness(1);
+    scale: 1;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flash{
+  position: relative;
+  /* background-color: aqua;  */
+  display: grid;
+  place-items: center;
+  background-image: url('./resources/flash.png');
+  /* background-image: url('./resources/pokeball.png'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 2%;
+  width: 100%;
+  grid-area: pokemon;
+}
+
+.score {
+  position: absolute;
+  right: 16px;
+  bottom: 0;
+  width: 40px; 
+  height: 40px; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.score p {
+  margin: 0;
+  font-family: "PokeFont", Arial, sans-serif;
+  color: #ffff00;
+  -webkit-text-stroke: 1px #0000ff;
+  text-shadow: -3px 3px 2px #333;
+  text-align: center;
+  font-size: 28px;
+  position: absolute;
+  top: 50%; /*Centralização do texto do score pro celular*/
+  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.pokeball{
+  width:100%;
+  height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.pokeoptions{
+  /* background-color: chocolate; */
+  padding: 16px;
+  grid-area: options;
+}
+.pokeoptions ul{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@font-face{
+  font-family: 'PokeFont';
+  src: url('./resources/Pokemon Solid.ttf') format('truetype');
+}
+
+h1 {
+  font-family: "PokeFont", Arial, sans-serif;
+  color: #ffff00;
+  -webkit-text-stroke: 1px #0000ff;
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: 3px;
+  margin-bottom: -16px;
+  grid-area: head;
+  text-shadow: -6px 6px 3px #333;
+  font-size: 32px;
+}
+
+.pokebtn{
+  /* background-color: pink; */
+  list-style: none;
+  text-transform: capitalize;
+  font-family: "PokeFont", Arial, sans-serif;
+  text-shadow: -3px 3px 2px #333;
+  color: #ffff00;
+  -webkit-text-stroke: 1px #0000ff;
+  cursor: pointer;
+  border-radius: 20px;
+  text-align: center;
+  height: 35px;
+  line-height: 10px;
+  border: none;
+  box-shadow: 4px 4px 8px rgba(0,0,0,1);
+  background: linear-gradient(to left, #ffffff, #ff0000); 
+  background-size: 100% 200%; 
+  transition: background 0.3s; 
+  letter-spacing: 2px;
+  font-size: 20px;
+  padding-top: 10px;
+}
+.pokebtn:active {
+  box-shadow: 4px 4px 8px rgba(0,0,0,1);
+  transform: translate(2px, 2px);
+}
+
+@media screen and (min-width: 321px) and (max-width: 767px) {
+  .pokeoptions ul{
+    gap: 30px;
   }
-  to {
-    transform: rotate(360deg);
+  .pokebtn{
+    font-size: 1.5rem;
+    height: 2em;
+    padding: 0px;
+    line-height: 40px;
+  }
+  h1{
+    font-size: 3rem;
+    -webkit-text-stroke: 3px #0000ff;
+  }
+  .pokequem{
+    transform: scale(1);
+  }
+  .pokebox{
+    grid-template-rows: auto 1fr 0.5fr;
+  }
+  .score{
+    transform: scale(2);
+    margin: 32px 32px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .pokeoptions ul{
+    gap: 24px;
+  }
+  .pokebtn{
+    font-size: 30px;
+    height: 60px;
+    padding: 10px;
+    line-height: 20px;
+  }
+  h1{
+    font-size: 48px;
+    -webkit-text-stroke: 2px #0000ff;
+  }
+  .pokequem{
+    transform: scale(1.2);
+  }
+  .pokebox{
+    grid-template-rows: auto 1fr 0.5fr;
+  }
+  .score{
+    transform: scale(2.5);
+    margin: 46px 46px;
+  }
+}
+
+@media screen and (min-width: 1024px){
+
+  .pokeoptions ul{
+    gap: 36px;
+  }
+  .pokebtn{
+    font-size: 36px;
+    height: 60px;
+    padding: 10px;
+    line-height: 20px;
+  }
+  h1{
+    font-size: 72px;
+    -webkit-text-stroke: 3px #0000ff;
+  }
+  .pokequem{
+    transform: scale(2);
+  }
+  .pokebox{
+    grid-template-rows: auto 1fr 0.5fr;
+  }
+  .score{
+    transform: scale(4);
+    margin-right: 80px;
+    margin-bottom: 80px;
   }
 }
