@@ -11,11 +11,26 @@ function App() {
   const [score, setScore] = useState(0)
   const scoreRef = useRef<HTMLParagraphElement | null>(null)
   const [scoreDelay, setDelay] = useState<boolean>(false)
+  const generation = 151
 
   /*Escolhendo os pokemons para alternativas */
+  // function choosePoke(list: string[]) {
+  //   const index = Math.floor(Math.random() * (pokeDex.length - 1))
+  //   console.log(index, pokeDex) /* Check DevTools: índice randomizado do pokemon escolhido, número de pokemons no array */
+  //   const current = list.find((value) => value == pokeDex[index])
+  //   if (current == undefined) {
+  //     list.push(pokeDex[index]);
+  //   } else {
+  //     choosePoke(list)
+  //   }
+  // }
   function choosePoke(list: string[]) {
-    const index = Math.floor(Math.random() * (pokeDex.length - 1))
-    const current = list.find((value) => value == pokeDex[index])
+    if (pokeDex.length === 0) {
+      return;
+    }
+    const index = Math.floor(Math.random() * (pokeDex.length - 1));
+    console.log(index, pokeDex) /* Check DevTools: índice randomizado do pokemon escolhido, número de pokemons no array */
+    const current = list.find((value) => value == pokeDex[index]);
     if (current == undefined) {
       list.push(pokeDex[index]);
     } else {
@@ -58,39 +73,63 @@ function App() {
 
   /*Puxando os nomes da API e adicionando na lista */
   const pokeNames = () => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${generation}`)
       .then((resp) => resp.json())
       .then((data: any) => {
-        data.results.forEach((value: any) => {
-          pokeDex.push(value.name)
-        })
-        poke()
+        const newPokeDex = data.results.map((value: any) => value.name);
+        setpokeDex(newPokeDex);
+        poke();
       })
   }
-
   /*Criando um poke aleatório, puxando sprite, 
   quantidade de alternativas, lógica para não adicionar repetido */
+  // const poke = () => {
+  //   const randomPoke = Math.floor(Math.random() * generation) + 1
+  //   fetch(`https://pokeapi.co/api/v2/pokemon/${randomPoke}`)
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       pokeHide()
+  //       setIMG(data.sprites.other.dream_world.front_default)
+  //       setNOME(data.name)
+  //       let list: string[] = [data.name];
+  //       const qtd = 5
+  //       for (let i = 0; i <= qtd - 1; ++i) {
+  //         choosePoke(list)
+  //       }
+  //       list = list.sort((a, b) => a < b ? -1 : 1)
+  //       setChoice(list)
+  //     })
+  // }
+
+
   const poke = () => {
-    const randomPoke = Math.floor(Math.random() * 151) + 1
-    // const randomPoke = 74
-    fetch(`https://pokeapi.co/api/v2/pokemon/${randomPoke}/`)
+    const randomPoke = Math.floor(Math.random() * generation);
+    fetch(`https://pokeapi.co/api/v2/pokemon/${randomPoke + 1}`)
       .then((resp) => resp.json())
       .then((data) => {
         pokeHide()
         setIMG(data.sprites.other.dream_world.front_default)
         setNOME(data.name)
         let list: string[] = [data.name];
-        const qtd = 5
-        for (let i = 0; i <= qtd - 1; ++i) {
-          choosePoke(list)
+        const qtd = 5;
+        for (let i = 1; i <= qtd; ++i) {
+          choosePoke(list);
         }
         list = list.sort((a, b) => a < b ? -1 : 1)
         setChoice(list)
       })
   }
   useEffect(() => {
-    pokeNames()
-  }, [])
+    pokeNames();
+  }, []);
+  /*Para a primeira vez que o site abrir, aguardar a lista ser preenchida antes de mostrar */
+  useEffect(() => {
+    if (pokeDex.length > 0) {
+      poke();
+    }
+  }, [pokeDex]);
+
+
 
   return (
     <div className='poketudo'>
