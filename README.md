@@ -3,9 +3,9 @@ Game nostálgico do intervalo do anime.
 ______________________
 
 # Como inicializar:
-Só rodar o *npm start* e tentar fazer 20 pontos.
+Instale as dependências com *npm install*, depois execute *npm start*
 
-Treinei um pouco de responsividade em algumas resoluções: Desktop, mobile(pequeno) e Iphones(6/7/8 plus).
+Treinei responsividade para: Desktop, mobile(pequeno) e Iphones(6/7/8 plus).
 
 Desktop:
 
@@ -32,21 +32,17 @@ Iphone:
 
 # Sobre:
 
-Me inspirei em criar esse projeto enquanto procurava alguma API para saber como funcionava, já que estava estudando sobre.
-Depois de me debater bastante, eu encontrei essa e mexi um pouco pra entender o que era o sprite, o que era o nome, id e outros dados de cada pokemon. Quando vi a sprite sozinha no meu html, tentei pintar ela de preto pra testar.
+Me inspirei em criar esse projeto enquanto procurava alguma API para ter meu primeiro contato.
 
-Sempre gostei de criar. Um gamezinho as vezes dá um gostinho, né?
+Essa é bem popular, o que garantia uma segurança de uso. Encontrei as sprites e depois de isolar elas no html e editar seus estilos, até pintar de preto
+
+Também foi meu primeiro contato criando algum tipo de game.
 
 Evoluções pessoais:
-- Aprendi a usar API, conheci ferramentas como Postman.
-- Comecei a treinar meu Typescript.
-- É o primeiro projeto que faço sem uma aula ensinando.
-- Treinei muito meu CSS. Optei por não arriscar o SASS pra treinar mais um pouco a base.
-- Ganhei um pouco de experiência com bugs e UI/UX.
-- Eu sei que é genérico, mas conseguir fazer um joguinho é muito recompensador.
+- Contato e uso de API e ferramentas relacionadas, como Postman pra mockar.
+- Contato com tipagem (Typescript).
+- Desenvolvimento sem aula/tutorial.
+- Aprofundei no CSS um pouco mais.
+- Experiência com bugs e UI/UX.
 
 Obrigado por ler até aqui!
-
-Meus contatos: 
-- 11 98545-2742 (Whatsapp)
-- Yokis (Discord)
